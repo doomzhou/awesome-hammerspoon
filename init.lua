@@ -371,3 +371,18 @@ end
 ----------------------------------------------------------------------------------------------------
 -- Finally we initialize ModalMgr supervisor
 spoon.ModalMgr.supervisor:enter()
+
+----------------------------------------------------------------------------------------------------
+-- Move an application to other monitor
+function moveWindowToDisplay(d)
+  return function()
+    local displays = hs.screen.allScreens()
+    local win = hs.window.focusedWindow()
+    win:moveToScreen(displays[d], false, true)
+  end
+end
+
+hs.hotkey.bind({"alt"}, "1", moveWindowToDisplay(1))
+hs.hotkey.bind({"alt"}, "2", moveWindowToDisplay(2))
+hs.hotkey.bind({"alt"}, "3", moveWindowToDisplay(3))
+----------------------------------------------------------------------------------------------------
